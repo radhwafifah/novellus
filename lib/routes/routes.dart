@@ -1,0 +1,29 @@
+class AppRoutes {
+  static const String splashScreen = '/splash_screen';
+  static const String intro = '/intro';
+  static const String intro2 = '/intro2';
+  static const String intro3 = '/intro3';
+  static const String login = '/login';
+  static const String register = '/register';
+  static const String forgotpass = '/forgot_pass';
+  static const String newpass = '/new_pass';
+  static const String resetpass = '/reset_pass';
+  static const String home = '/home';
+  static const String profil = '/profil';
+  static const String account = '/account';
+  static const String info = '/info';
+  static const String publis = '/publish';
+  static const String settings = '/settings';
+  static const String library = '/library';
+  static const String create = '/create';
+  static const String add = '/add';
+  static const String add3 = '/add3';
+  static const String history = '/intro2';
+  static const String bar = '/bar';
+  static const String book = '/book';
+  static const String genre = '/genre';
+  static const String notifications = '/notifications';
+  static const String read = '/read';
+  static const String search = '/search';
+  static const String terbit = '/terbit';
+}
