@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'bar.dart';
+import '../bar.dart';
 
 class History extends StatefulWidget {
   @override

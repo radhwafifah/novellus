@@ -1,93 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:novellus1/resources/snackbar_extension.dart';
-import 'package:novellus1/screens/home.dart';
-import 'package:novellus1/screens/login/forgot_pass.dart';
-import 'package:novellus1/screens/login/register.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:novellus1/common/utils/common.dart';
+import 'package:get/get.dart';
+import 'package:novellus1/screens/auth/controllers/auth_controller.dart';
+import 'package:novellus1/screens/auth/forgot_pass.dart';
 
-class Login extends StatefulWidget {
-  @override
-  _Login createState() => _Login();
-}
-
-class _Login extends State<Login> {
-  bool _obscureText = true;
-  bool _isLoading = false;
-  final supabase = Supabase.instance.client;
-  late TextEditingController _usernameController;
-  late TextEditingController _passwordController;
-  GlobalKey<FormState> _formKey = GlobalKey();
-
-  @override
-  void initState() {
-    super.initState();
-    _usernameController = TextEditingController();
-    _passwordController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _usernameController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
-  void _signIn() async {
-    final isValid = _formKey.currentState?.validate();
-
-    if (isValid != null && isValid) {
-
-      setState(() {
-        _isLoading = true;
-      });
-
-      try {
-        await supabase.auth.signInWithPassword(
-        email: _usernameController.text,
-        password: _passwordController.text,
-        );
-
-        setState(() {
-          _isLoading = false;
-        });
-
-        _navigateToHomePage();
-
-      } on AuthException catch (e) {
-        context.showSnackBar(message: e.message, backgroundColor: Colors.red);
-        setState(() {
-          _isLoading = false;
-        });
-      }
-      catch (e) {
-        context.showSnackBar(message: e.toString(), backgroundColor: Colors.red);
-        setState(() {
-          _isLoading = false;
-        });
-      }
-    }
-  }
-
-  void _navigateToHomePage() {
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => Home()), (route) => false);
-  }
+class Login extends GetView<AuthController> {
 
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Padding(
-          key: _formKey,
             padding: const EdgeInsets.all(25),
             child: ListView(
               children: [
-
-                if (_isLoading)... [
-                  const Center(
-                    child: CircularProgressIndicator.adaptive(),
-                  )
-                ],
-
                 const SizedBox(
                   height: 80,
                 ),
@@ -140,7 +64,7 @@ class _Login extends State<Login> {
                                   }
                                   return null;
                                 },
-                          controller: _usernameController,
+                          controller: controller.email,
                           decoration: const InputDecoration(
                               border: InputBorder.none,
                               hintText: "Masukkan username",
@@ -158,10 +82,7 @@ class _Login extends State<Login> {
                           color: Color(0xFF777777)),
                     ),
                     const SizedBox(height: 8),
-                    _isLoading ? const Center(
-                      child: CircularProgressIndicator(),
-                    )
-                    : Container(
+                    Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -181,8 +102,8 @@ class _Login extends State<Login> {
                         }
                         return null;
                       },
-                          controller: _passwordController,
-                        obscureText: _obscureText,
+                          controller: controller.password,
+                        obscureText: controller.obscureText.value,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: "Masukkan Password",
@@ -192,12 +113,10 @@ class _Login extends State<Login> {
                               const EdgeInsets.symmetric(horizontal: 16, vertical: 17),
                           suffixIcon: GestureDetector(
                             onTap: () {
-                              setState(() {
-                                _obscureText = !_obscureText;
-                              });
+                              controller.obscureText.value = !controller.obscureText.value;
                             },
                             child: Icon(
-                              _obscureText
+                              controller.obscureText.value
                                   ? Icons.visibility_off
                                   : Icons.visibility,
                             ),
@@ -244,28 +163,8 @@ class _Login extends State<Login> {
                         backgroundColor: const Color(0xFFA9C6D1),
                       ),
                       onPressed: () async {
-                        final isValid = _formKey.currentState?.validate();
-                        if (isValid != true) {
-                          return;
-                        }
-                        setState(() {
-                          _isLoading = true;
-                        });
-                        try {
-                          await client.auth.signInWithPassword(
-                            email: _usernameController.text,
-                            password: _passwordController.text
-                          );
-                        } catch (e) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Login Gagal'),
-                            backgroundColor: Colors.redAccent,
-                            )
-                          );
-                          setState(() {
-                            _isLoading = false;
-                          });
-                        }
+                        print("loding");
+                      await controller.login();
                       },
                       child: const Text(
                         "MASUK",
@@ -369,7 +268,7 @@ class _Login extends State<Login> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => Register()));
+                      Get.offNamed('/register');
                     },
                     child: const Text(
                       "Daftar",

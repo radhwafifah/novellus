@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:novellus1/screens/create/controllers/add_controller.dart';
 import 'package:novellus1/screens/create/create.dart';
 
-class AddStory extends StatefulWidget {
-  @override
-  State<AddStory> createState() => _AddStoryState();
-}
-
-class _AddStoryState extends State<AddStory> {
+class AddStory extends GetView<AddController> {
   bool isChecked = false;
+  final AddController controller = Get.put(AddController());
 
   @override
   Widget build(BuildContext context) {
@@ -55,23 +53,26 @@ class _AddStoryState extends State<AddStory> {
                         SizedBox(
                           height: 12,
                         ),
-                          Container(
-                            width: 450,
-                            height: 175,
-                            decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.6),
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(
-                          color: Colors.blue.shade300,
-                          width: 1.0,
-                        ),
-                                ),
-                                child: IconButton(
-                                  icon: 
-                                  Icon(Icons.add_a_photo_outlined, color: Colors.blue.shade300, size: 40,),
-                                  onPressed: () {},
-                                ),
+                        Container(
+                          width: 450,
+                          height: 175,
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.6),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: Colors.blue.shade300,
+                              width: 1.0,
+                            ),
                           ),
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.add_a_photo_outlined,
+                              color: Colors.blue.shade300,
+                              size: 40,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -93,6 +94,7 @@ class _AddStoryState extends State<AddStory> {
                       height: 20,
                     ),
                     TextField(
+                      controller: controller.title,
                       decoration: InputDecoration(
                         hintText: "Masukkan Judul Buku",
                         hintStyle:
@@ -112,6 +114,8 @@ class _AddStoryState extends State<AddStory> {
                 child: Column(
                   children: [
                     TextFormField(
+                      controller: controller.synopsis,
+                      maxLines: 6,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "Masukkan Deskripsi Buku",
@@ -137,7 +141,9 @@ class _AddStoryState extends State<AddStory> {
                       height: 50,
                       child: FloatingActionButton(
                         backgroundColor: Color(0xFFA9C6D1),
-                        onPressed: () {
+                        onPressed: () async {
+                          //     print("loding");
+                          // await controller.add();
                           showModalBottomSheet(
                               elevation: 0,
                               enableDrag: true,
@@ -168,12 +174,28 @@ class _AddStoryState extends State<AddStory> {
                                           child: Column(
                                             children: [
                                               ListTile(
-                                                leading: TextButton(
-                                                  onPressed: () {},
-                                                  child: Text(
-                                                    "Kategori",
-                                                    style: TextStyle(
-                                                      fontSize: 23,
+                                                leading: Obx(
+                                                  () => Container(
+                                                    width: 120,
+                                                    height: 60,
+                                                    child:
+                                                        DropdownButton<String>(
+                                                      value: controller
+                                                          .selectedItem.value,
+                                                      onChanged:
+                                                          (String? newValue) {
+                                                        controller.selectedItem
+                                                            .value = newValue!;
+                                                      },
+                                                      isExpanded: true,
+                                                      items: controller.items
+                                                          .map((String value) {
+                                                        return DropdownMenuItem<
+                                                            String>(
+                                                          value: value,
+                                                          child: Text(value),
+                                                        );
+                                                      }).toList(),
                                                     ),
                                                   ),
                                                 ),
@@ -182,11 +204,10 @@ class _AddStoryState extends State<AddStory> {
                                                   style: TextStyle(
                                                       fontSize: 18,
                                                       fontWeight:
-                                                          FontWeight.w300,
-                                                      color: Colors.black54),
+                                                          FontWeight.w300, color: Colors.grey),
                                                 ),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 10,
                                               ),
                                               Divider(),
@@ -198,12 +219,27 @@ class _AddStoryState extends State<AddStory> {
                                           child: Column(
                                             children: [
                                               ListTile(
-                                                leading: TextButton(
-                                                  onPressed: () {},
-                                                  child: Text(
-                                                    "Genreee",
-                                                    style: TextStyle(
-                                                      fontSize: 23,
+                                                leading: Obx(
+                                                  () => Container(
+                                                    width: 120,
+                                                    height: 60,
+                                                    child: DropdownButton<String>(
+                                                      value: controller
+                                                          .selectedItem2.value,
+                                                      onChanged:
+                                                          (String? newValue) {
+                                                        controller.selectedItem2
+                                                            .value = newValue!;
+                                                      },
+                                                      isExpanded: true,
+                                                      items: controller.items2
+                                                          .map((String value) {
+                                                        return DropdownMenuItem<
+                                                            String>(
+                                                          value: value,
+                                                          child: Text(value),
+                                                        );
+                                                      }).toList(),
                                                     ),
                                                   ),
                                                 ),
@@ -212,8 +248,7 @@ class _AddStoryState extends State<AddStory> {
                                                   style: TextStyle(
                                                       fontSize: 18,
                                                       fontWeight:
-                                                          FontWeight.w300,
-                                                      color: Colors.grey),
+                                                          FontWeight.w300, color: Colors.grey),
                                                 ),
                                               ),
                                               SizedBox(
@@ -284,7 +319,10 @@ class _AddStoryState extends State<AddStory> {
                                                 child: FloatingActionButton(
                                                   backgroundColor:
                                                       Color(0xFFA9C6D1),
-                                                  onPressed: () {},
+                                                  onPressed: () async {
+                                                    print("loding");
+                                                    await controller.add();
+                                                  },
                                                   child: Text(
                                                     "Lanjut",
                                                     style:

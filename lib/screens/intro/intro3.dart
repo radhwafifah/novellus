@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:novellus1/screens/intro/intro2.dart';
-import 'package:novellus1/screens/login/login.dart';
 
 class intro3 extends StatefulWidget {
   @override
@@ -65,8 +66,10 @@ class _introState3 extends State<intro3> {
                       height: 50,
                       child: FloatingActionButton(
                         onPressed: () {
-                          Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => Login()));
+                          GetStorage box = GetStorage();
+                          box.write("isFirstOpen", false);
+                          print (box.read("isFirstOpen"));
+                          Get.offAllNamed('/login');
                         },
                         child: Text("Ayo Mulai", style: TextStyle(fontSize: 16),),
                         shape: RoundedRectangleBorder(

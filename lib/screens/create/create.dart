@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:novellus1/screens/bar.dart';
-import 'package:novellus1/screens/create/add.dart';
-import 'package:novellus1/screens/terbit.dart';
+import 'package:novellus1/screens/create/controllers/create_controller.dart';
 
-class Create extends StatefulWidget {
+class Create extends GetView<CreateController> {
   @override
-  State<Create> createState() => _CreateState();
-}
 
-class _CreateState extends State<Create> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
@@ -31,8 +27,7 @@ class _CreateState extends State<Create> {
                             size: 33,
                           ),
                           onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Bar()));
+                            Get.offNamed('/bar');
                           },
                         ),
                       ),
@@ -71,8 +66,7 @@ class _CreateState extends State<Create> {
                     height: 80,
                     child: FloatingActionButton(
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Terbit()));
+                        Get.offNamed('/terbit');
                       },
                       child: Text("Diterbitkan",
                       style: TextStyle(fontSize: 18, color: Colors.white),
@@ -94,7 +88,7 @@ class _CreateState extends State<Create> {
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
             ),
-            Padding(
+            ...List.generate(controller.literaryWork.length, (index) => Padding(
               padding: const EdgeInsets.all(10),
               child: Row(
                 children: [
@@ -117,7 +111,7 @@ class _CreateState extends State<Create> {
                   Column(
                     children: [
                       Text(
-                        "Masa Remaja",
+                        controller.literaryWork[index]['title'],
                         style: TextStyle(
                             fontSize: 23, fontWeight: FontWeight.w400),
                       ),
@@ -152,7 +146,7 @@ class _CreateState extends State<Create> {
                   ),
                 ],
               ),
-            ),
+            ),)
           ],
         ),
       ),
@@ -164,14 +158,12 @@ class _CreateState extends State<Create> {
             child: FloatingActionButton(
               backgroundColor: Color(0xFFA9C6D1),
               onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => AddStory()));
+                Get.offNamed('/add');
               },
               child: IconButton(
                 icon: Icon(Icons.add),
                 onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => AddStory()));
+                  Get.offNamed('/add');
                 },
               ),
               shape: RoundedRectangleBorder(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:novellus1/screens/auth/controllers/auth_controller.dart';
 import 'package:novellus1/screens/bar.dart';
-import 'package:novellus1/screens/login/login.dart';
 import 'package:novellus1/screens/profil/account.dart';
 import 'package:novellus1/screens/profil/info.dart';
 import 'package:novellus1/screens/profil/publish.dart';
@@ -260,8 +261,8 @@ class _ProfilState extends State<Profil> {
                       ),
                       child: IconButton(
                         onPressed: () {
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) => Login()));
+                          AuthController auth = Get.put(AuthController());
+                          auth.logout();
                         },
                         icon: Icon(
                           Icons.logout,

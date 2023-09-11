@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:novellus1/screens/login/login.dart';
-import 'package:novellus1/screens/login/register.dart';
+import 'package:novellus1/screens/auth/login.dart';
+import 'package:novellus1/screens/auth/register.dart';
 
 class ForgotPass extends StatelessWidget {
   @override

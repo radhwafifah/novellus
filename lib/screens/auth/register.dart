@@ -1,89 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:novellus1/resources/snackbar_extension.dart';
-import 'package:novellus1/screens/login/login.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:novellus1/screens/auth/controllers/auth_controller.dart';
 
-class Register extends StatefulWidget {
-  @override
-  _Register createState() => _Register();
-}
+class Register extends GetView<AuthController> {
 
-class _Register extends State<Register> {
-  bool _obscureText = true;
-  final supabase = Supabase.instance.client;
-  bool _isLoading = false;
-  late TextEditingController _emailController;
-  late TextEditingController _usernameController;
-  late TextEditingController _passwordController;
-  final _formKey = GlobalKey<FormState>();
-
-  @override
-  void initState() {
-    super.initState();
-
-    _emailController = TextEditingController();
-    _usernameController = TextEditingController();
-    _passwordController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _usernameController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
-  void _signUp() async {
-
-    try {
-      setState(() {
-        _isLoading = true;
-      });
-
-      await supabase.auth.signUp(
-        email: _emailController.text,
-        password: _passwordController.text,
-        data: {'username': _usernameController.text.toLowerCase()}
-        );
-
-        setState(() {
-          _isLoading = false;
-        });
-        _navigateToLoginPage();
-    } on AuthException catch (e) {
-      context.showSnackBar(message: e.message, backgroundColor: Colors.red);
-      setState(() {
-        _isLoading = false;
-      });
-
-    }
-    catch (e) {
-      context.showSnackBar(message: e.toString(), backgroundColor: Colors.red);
-      setState(() {
-        _isLoading = false;
-      });
-    }
-  }
-
-  void _navigateToLoginPage() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) => Login()));
-  }
-
+  @override  
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
           padding: const EdgeInsets.all(25),
           child: ListView(
-            key: _formKey,
             children: [
-
-              if (_isLoading)... [
-                  const Center(
-                    child: CircularProgressIndicator.adaptive(),
-                  )
-                ],
-
               const SizedBox(
                 height: 80,
               ),
@@ -120,7 +48,7 @@ class _Register extends State<Register> {
                       child: TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.next,
-                        controller: _emailController,
+                        controller: controller.email,
                         decoration: const InputDecoration(
                             border: InputBorder.none,
                             hintText: "Masukkan email",
@@ -148,7 +76,7 @@ class _Register extends State<Register> {
                       ),
                       child: TextFormField(
                         textInputAction: TextInputAction.next,
-                        controller: _usernameController,
+                        controller: controller.username,
                         decoration: const InputDecoration(
                             border: InputBorder.none,
                             hintText: "Masukkan username",
@@ -167,6 +95,35 @@ class _Register extends State<Register> {
                                   return null;
                                 }
                       )),
+                      const SizedBox(height: 26,),
+                      Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                      ),
+                      child: TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
+                        controller: controller.name,
+                        decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Masukkan nama",
+                            hintStyle: TextStyle(
+                                fontSize: 15, color: Color(0xFFB4B4B4)),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 17)),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'email is empty';
+                                  }
+                                  return null;
+                                }
+                      )),
                   const SizedBox(height: 26),
                   Container(
                     width: double.infinity,
@@ -178,38 +135,39 @@ class _Register extends State<Register> {
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white,
                     ),
-                    child: TextFormField(
-                      keyboardType: TextInputType.visiblePassword,
-                      controller: _passwordController,
-                      obscureText: _obscureText,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "Masukkan kata sandi",
-                        hintStyle:
-                            const TextStyle(fontSize: 15, color: Color(0xFFB4B4B4)),
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 16, vertical: 17),
-                        suffixIcon: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _obscureText = !_obscureText;
-                            });
-                          },
-                          child: Icon(
-                            _obscureText
-                                ? Icons.visibility_off
-                                : Icons.visibility,
+                    child: Obx(
+                      () {
+                        return TextFormField(
+                          controller: controller.password,
+                          obscureText: controller.obscureText.value,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Masukkan kata sandi",
+                            hintStyle:
+                                const TextStyle(fontSize: 15, color: Color(0xFFB4B4B4)),
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 16, vertical: 17),
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                controller.obscureText.value = !controller.obscureText.value;
+                              },
+                              child: Icon(
+                                controller.obscureText.value
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Required';
-                        }
-                        if (value.length < 6) {
-                          return ' password length must be 6 char or more';
-                        }
-                        return null;
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Required';
+                            }
+                            if (value.length < 6) {
+                              return ' password length must be 6 char or more';
+                            }
+                            return null;
+                          }
+                        );
                       }
                     ),
                   )
@@ -224,8 +182,9 @@ class _Register extends State<Register> {
                     style: FilledButton.styleFrom(
                       backgroundColor: Color(0xFFA9C6D1),
                     ),
-                    onPressed: () {
-                      _isLoading ? null : _signUp();
+                    onPressed: () async {
+                      print("loding");
+                      await controller.signup();
                     },
                     child: const Text(
                       "DAFTAR",
@@ -330,7 +289,7 @@ class _Register extends State<Register> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    _navigateToLoginPage();
+                    
                   },
                   child: const Text(
                     "Masuk",

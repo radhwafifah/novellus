@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:novellus1/screens/create/add.dart';
+import 'package:get/get.dart';
+import 'package:novellus1/screens/create/controllers/add3_controller.dart';
 
-class AddStory3 extends StatefulWidget {
-  @override
-  State<AddStory3> createState() => _AddStory3State();
-}
+class AddStory3 extends GetView<Add3Controller> {
+  final Add3Controller controller = Get.put(Add3Controller());
 
-class _AddStory3State extends State<AddStory3> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
@@ -26,8 +23,7 @@ class _AddStory3State extends State<AddStory3> {
                       size: 30,
                     ),
                     onPressed: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => AddStory()));
+                      Get.offNamed('/add');
                     },
                   ),
                   Text(
@@ -73,6 +69,8 @@ class _AddStory3State extends State<AddStory3> {
                 Text("Judul Bab :", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),),
                 SizedBox(height: 20,),
                 TextField(
+                  controller: controller.title,
+                  maxLines: 2,
                   decoration: InputDecoration(
                     hintText: "Masukkan Judul Bab",
                           hintStyle:
@@ -90,6 +88,8 @@ class _AddStory3State extends State<AddStory3> {
             child: Column(
               children: [
                 TextFormField(
+                  controller: controller.content,
+                  maxLines: 8,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Mulai ketik isi cerita..'
@@ -109,7 +109,9 @@ class _AddStory3State extends State<AddStory3> {
             height: 50,
             child: FloatingActionButton(
               backgroundColor: Color(0xFFA9C6D1),
-              onPressed: () {},
+              onPressed: () {
+                Get.offAllNamed('/create');
+              },
               child: Text("Terbitkan", style: TextStyle(fontSize: 17),),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),

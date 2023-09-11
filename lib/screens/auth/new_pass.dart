@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:novellus1/screens/login/login.dart';
+import 'package:novellus1/screens/auth/login.dart';
 
 class NewPass extends StatefulWidget {
   @override

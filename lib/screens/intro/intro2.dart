@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:novellus1/screens/intro/intro.dart';
 import 'package:novellus1/screens/intro/intro3.dart';
 
-import '../login/login.dart';
+import '../auth/login.dart';
 
 class intro2 extends StatefulWidget {
   @override
