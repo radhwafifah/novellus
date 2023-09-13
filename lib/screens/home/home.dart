@@ -247,17 +247,22 @@ class Home extends GetView<HomeController> {
                     children: [
                       Column(
                         children: [
-                          Card(
-                            child: Container(
-                              width: 140,
-                              height: 190,
-                              decoration: BoxDecoration(
-                                  color: Colors.grey,
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                      image: AssetImage("assets/cover1.jpg")),
-                                  ),
+                          InkWell(
+                            onTap: () {
+                              
+                            },
+                            child: Card(
+                              child: Container(
+                                width: 140,
+                                height: 190,
+                                decoration: BoxDecoration(
+                                    color: Colors.grey,
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                        image: AssetImage("assets/cover1.jpg")),
+                                    ),
+                              ),
                             ),
                           ),
                         ],

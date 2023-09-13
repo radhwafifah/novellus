@@ -64,7 +64,8 @@ class _HistoryState extends State<History> {
                               color: Colors.grey,
                               borderRadius: BorderRadius.circular(10),
                               image: DecorationImage(
-                                      image: AssetImage("assets/remaja2.jpg")),
+                                fit: BoxFit.cover,
+                                image: AssetImage("assets/remaja2.jpg")),
                               ),
                         ),
                       ),
