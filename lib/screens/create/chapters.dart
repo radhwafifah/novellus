@@ -24,7 +24,7 @@ class Chapters extends GetView<ChaptersController> {
                           child: IconButton(
                             icon: Icon(Icons.arrow_back, size: 33,),
                             onPressed: () {
-                              Get.offNamed('/bar');
+                              Get.toNamed('/bar');
                             },
                           )),
                       SizedBox(
@@ -102,12 +102,12 @@ class Chapters extends GetView<ChaptersController> {
             child: FloatingActionButton(
               backgroundColor: Color(0xFFA9C6D1),
               onPressed: () {
-                Get.offNamed('/add3');
+                Get.toNamed('/add3');
               },
               child: IconButton(
                 icon: Icon(Icons.add),
                 onPressed: () {
-                  Get.offNamed('/add3');
+                  Get.toNamed('/add3');
                 },
               ),
               shape: RoundedRectangleBorder(

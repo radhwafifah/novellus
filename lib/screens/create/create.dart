@@ -54,7 +54,7 @@ class Create extends GetView<CreateController> {
                 height: 80,
                 child: FloatingActionButton(
                   onPressed: () {
-                    Get.offNamed('/terbit');
+                    Get.toNamed('/terbit');
                   },
                   child: Text(
                     "Diterbitkan",
@@ -123,7 +123,7 @@ class Create extends GetView<CreateController> {
                           height: 40,
                           child: FloatingActionButton(
                             onPressed: () {
-                              Get.offNamed('/chapters');
+                              Get.toNamed('/chapters');
                             },
                             child: Text(
                               "Lanjutkan",
@@ -152,12 +152,12 @@ class Create extends GetView<CreateController> {
             child: FloatingActionButton(
               backgroundColor: Color(0xFFA9C6D1),
               onPressed: () {
-                Get.offNamed('/add');
+                Get.toNamed('/add');
               },
               child: IconButton(
                 icon: Icon(Icons.add),
                 onPressed: () {
-                  Get.offNamed('/add');
+                  Get.toNamed('/add');
                 },
               ),
               shape: RoundedRectangleBorder(

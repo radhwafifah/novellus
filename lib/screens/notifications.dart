@@ -26,7 +26,7 @@ class _NotifState extends State<Notif> {
                           alignment: Alignment.bottomLeft,
                           child: IconButton(
                             icon: Icon(Icons.arrow_back, size: 33,), onPressed: () { 
-                              Get.offNamed('/bar');
+                              Get.toNamed('/bar');
                             },
                           )),
                           SizedBox(width: 10,),

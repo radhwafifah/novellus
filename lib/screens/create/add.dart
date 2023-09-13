@@ -26,7 +26,7 @@ class AddStory extends GetView<AddController> {
                       size: 30,
                     ),
                     onPressed: () {
-                      Get.offNamed('/bar');
+                      Get.toNamed('/bar');
                     },
                   ),
                   const Text(
@@ -40,49 +40,45 @@ class AddStory extends GetView<AddController> {
               ),
               Padding(
                 padding: const EdgeInsets.all(10),
-                child: Row(
+                child: Column(
                   children: [
-                    Column(
-                      children: [
-                        const Text(
-                          "Tambahkan Sampul Buku Cerita :",
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w400),
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        GetBuilder<AddController>(builder: (_) {
-                          return Container(
-                            width: 450,
-                            height: 175,
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.6),
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(
-                                color: Colors.blue.shade300,
-                                width: 1.0,
-                              ),
-                              image: controller.image == null
-                                  ? null
-                                  : DecorationImage(
-                                      image: FileImage(controller.image!),
-                                    ),
-                            ),
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.add_a_photo_outlined,
-                                color: Colors.blue.shade300,
-                                size: 40,
-                              ),
-                              onPressed: () async {
-                                await controller.selectImage();
-                              },
-                            ),
-                          );
-                        }),
-                      ],
+                    const Text(
+                      "Tambahkan Sampul Buku Cerita :",
+                      style: TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.w400),
                     ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    GetBuilder<AddController>(builder: (_) {
+                      return Container(
+                        width: Get.width,
+                        height: 175,
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.6),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: Colors.blue.shade300,
+                            width: 1.0,
+                          ),
+                          image: controller.image == null
+                              ? null
+                              : DecorationImage(
+                                  image: FileImage(controller.image!),
+                                ),
+                        ),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.add_a_photo_outlined,
+                            color: Colors.blue.shade300,
+                            size: 40,
+                          ),
+                          onPressed: () async {
+                            await controller.selectImage();
+                          },
+                        ),
+                      );
+                    }),
                   ],
                 ),
               ),
@@ -135,9 +131,6 @@ class AddStory extends GetView<AddController> {
                     )
                   ],
                 ),
-              ),
-              const SizedBox(
-                height: 300,
               ),
               ButtonTheme(
                 child: Container(

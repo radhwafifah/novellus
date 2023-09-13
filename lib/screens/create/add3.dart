@@ -23,7 +23,7 @@ class AddStory3 extends GetView<Add3Controller> {
                       size: 30,
                     ),
                     onPressed: () {
-                      Get.offNamed('/chapters');
+                      Get.toNamed('/chapters');
                     },
                   ),
                   Text(

@@ -29,7 +29,7 @@ class _GenreState extends State<Genre> {
                               size: 33,
                             ),
                             onPressed: () {
-                              Get.offNamed('/bar');
+                              Get.toNamed('/bar');
                             },
                           )),
                       SizedBox(
