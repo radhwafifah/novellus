@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:novellus1/screens/create/create.dart';
 
 class Terbit extends StatefulWidget {
@@ -26,8 +27,7 @@ class _TerbitState extends State<Terbit> {
                           child: IconButton(
                       icon: Icon(Icons.arrow_back, size: 33,),
                       onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => Create()));
+                        Get.offNamed('/bar');
                       },
                     ),),
                       SizedBox(

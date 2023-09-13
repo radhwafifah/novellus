@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:novellus1/screens/bar.dart';
+import 'package:get/get.dart';
+import 'package:novellus1/resources/models/literary_model.dart';
+import 'package:novellus1/screens/create/controllers/chapters_controller.dart';
 
-class Library extends StatefulWidget {
-  @override
-  State<Library> createState() => _LibraryState();
-}
+class Chapters extends GetView<ChaptersController> {
 
-class _LibraryState extends State<Library> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,11 +19,19 @@ class _LibraryState extends State<Library> {
                 children: [
                   Row(
                     children: [
+                      Container(
+                          alignment: Alignment.bottomLeft,
+                          child: IconButton(
+                            icon: Icon(Icons.arrow_back, size: 33,),
+                            onPressed: () {
+                              Get.offNamed('/bar');
+                            },
+                          )),
                       SizedBox(
                         width: 10,
                       ),
                       Text(
-                        "Perpustakaan",
+                        "Masa Remaja",
                         style: TextStyle(
                             fontSize: 26, fontWeight: FontWeight.bold),
                       ),
@@ -41,7 +47,7 @@ class _LibraryState extends State<Library> {
               ),
             ),
             SizedBox(height: 40,),
-            Padding(
+            ...List.generate(controller.chapters.length, (index) => Padding(
               padding: const EdgeInsets.all(10),
               child: Row(
                 children: [
@@ -53,10 +59,7 @@ class _LibraryState extends State<Library> {
                           height: 160,
                           decoration: BoxDecoration(
                               color: Colors.grey,
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                      image: AssetImage("assets/remaja2.jpg")),
-                              ),
+                              borderRadius: BorderRadius.circular(10)),
                         ),
                       ),
                     ],
@@ -67,11 +70,11 @@ class _LibraryState extends State<Library> {
                   Column(
                     children: [
                       Text(
-                        "Masa Remaja",
+                        controller.chapters[index][''],
                         style: TextStyle(fontSize: 23, fontWeight: FontWeight.w400),
                       ),
                       SizedBox(height: 5,),
-                  Text("By Radhwa Afifah", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w200),),
+                  Text("Bab 1", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w200),),
                   SizedBox(height: 30,),
                   ButtonTheme(
                     child: Container(
@@ -79,7 +82,7 @@ class _LibraryState extends State<Library> {
                       height: 40,
                       child: FloatingActionButton(
                         onPressed: () {},
-                        child: Text("Baca", style: TextStyle(fontSize: 16),),
+                        child: Text("Edit", style: TextStyle(fontSize: 16),),
                         backgroundColor: Color(0xFFA9C6D1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15),
@@ -90,7 +93,30 @@ class _LibraryState extends State<Library> {
                   ),
                 ],
               ),
+            ),),
+        Container(
+        alignment: Alignment.bottomRight,
+        margin: EdgeInsets.all(20),
+        child: ButtonTheme(
+          child: Container(
+            child: FloatingActionButton(
+              backgroundColor: Color(0xFFA9C6D1),
+              onPressed: () {
+                Get.offNamed('/add3');
+              },
+              child: IconButton(
+                icon: Icon(Icons.add),
+                onPressed: () {
+                  Get.offNamed('/add3');
+                },
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
             ),
+          ),
+        ),
+      ),
           ],
         ),
       ),

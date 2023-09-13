@@ -1,13 +1,10 @@
-import 'dart:io';
-
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:novellus1/common/controllers/app_controller.dart';
 import 'package:novellus1/resources/databases/literary_database.dart';
-import 'package:novellus1/resources/models/literary_model.dart';
 
 class CreateController extends GetxController {
   AppController app = Get.find<AppController>();
+  
 
   @override
   void onInit() {

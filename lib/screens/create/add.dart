@@ -1,42 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:novellus1/screens/create/controllers/add_controller.dart';
-import 'package:novellus1/screens/create/create.dart';
 
 class AddStory extends GetView<AddController> {
   bool isChecked = false;
   final AddController controller = Get.put(AddController());
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               Row(
                 children: [
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_back,
                       size: 30,
                     ),
                     onPressed: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => Create()));
+                      Get.offNamed('/bar');
                     },
                   ),
-                  Text(
+                  const Text(
                     "Buat Cerita",
                     style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               Padding(
@@ -45,57 +44,66 @@ class AddStory extends GetView<AddController> {
                   children: [
                     Column(
                       children: [
-                        Text(
+                        const Text(
                           "Tambahkan Sampul Buku Cerita :",
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w400),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 12,
                         ),
-                        Container(
-                          width: 450,
-                          height: 175,
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.6),
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                              color: Colors.blue.shade300,
-                              width: 1.0,
+                        GetBuilder<AddController>(builder: (_) {
+                          return Container(
+                            width: 450,
+                            height: 175,
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.6),
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                color: Colors.blue.shade300,
+                                width: 1.0,
+                              ),
+                              image: controller.image == null
+                                  ? null
+                                  : DecorationImage(
+                                      image: FileImage(controller.image!),
+                                    ),
                             ),
-                          ),
-                          child: IconButton(
-                            icon: Icon(
-                              Icons.add_a_photo_outlined,
-                              color: Colors.blue.shade300,
-                              size: 40,
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.add_a_photo_outlined,
+                                color: Colors.blue.shade300,
+                                size: 40,
+                              ),
+                              onPressed: () async {
+                                await controller.selectImage();
+                              },
                             ),
-                            onPressed: () {},
-                          ),
-                        ),
+                          );
+                        }),
                       ],
                     ),
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Padding(
                 padding: EdgeInsets.all(10),
                 child: Column(
                   children: [
-                    Text(
+                    const Text(
                       "Judul Buku :",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     TextField(
                       controller: controller.title,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: "Masukkan Judul Buku",
                         hintStyle:
                             TextStyle(fontSize: 16, color: Color(0xFFB4B4B4)),
@@ -106,17 +114,17 @@ class AddStory extends GetView<AddController> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Padding(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Column(
                   children: [
                     TextFormField(
                       controller: controller.synopsis,
                       maxLines: 6,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: "Masukkan Deskripsi Buku",
                         hintStyle:
@@ -128,26 +136,26 @@ class AddStory extends GetView<AddController> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 300,
               ),
               ButtonTheme(
                 child: Container(
                   alignment: Alignment.bottomRight,
-                  margin: EdgeInsets.all(20),
+                  margin: const EdgeInsets.all(20),
                   child: ButtonTheme(
                     child: Container(
                       width: 100,
                       height: 50,
                       child: FloatingActionButton(
-                        backgroundColor: Color(0xFFA9C6D1),
+                        backgroundColor: const Color(0xFFA9C6D1),
                         onPressed: () async {
                           //     print("loding");
                           // await controller.add();
                           showModalBottomSheet(
                               elevation: 0,
                               enableDrag: true,
-                              shape: RoundedRectangleBorder(
+                              shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(40),
                                       topRight: Radius.circular(40))),
@@ -159,18 +167,18 @@ class AddStory extends GetView<AddController> {
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: <Widget>[
-                                        Text(
+                                        const Text(
                                           "Tambahkan",
                                           style: TextStyle(
                                               fontSize: 25,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10,
                                         ),
-                                        Divider(),
+                                        const Divider(),
                                         Padding(
-                                          padding: EdgeInsets.all(10),
+                                          padding: const EdgeInsets.all(10),
                                           child: Column(
                                             children: [
                                               ListTile(
@@ -199,23 +207,24 @@ class AddStory extends GetView<AddController> {
                                                     ),
                                                   ),
                                                 ),
-                                                title: Text(
+                                                title: const Text(
                                                   "Informasi ini membantu kami lebih memahami ceritamu!",
                                                   style: TextStyle(
                                                       fontSize: 18,
                                                       fontWeight:
-                                                          FontWeight.w300, color: Colors.grey),
+                                                          FontWeight.w300,
+                                                      color: Colors.grey),
                                                 ),
                                               ),
                                               const SizedBox(
                                                 height: 10,
                                               ),
-                                              Divider(),
+                                              const Divider(),
                                             ],
                                           ),
                                         ),
                                         Padding(
-                                          padding: EdgeInsets.all(10),
+                                          padding: const EdgeInsets.all(10),
                                           child: Column(
                                             children: [
                                               ListTile(
@@ -223,7 +232,9 @@ class AddStory extends GetView<AddController> {
                                                   () => Container(
                                                     width: 120,
                                                     height: 60,
-                                                    child: DropdownButton<String>(
+                                                    color: const Color(0xFFA9C6D1),
+                                                    child:
+                                                        DropdownButton<String>(
                                                       value: controller
                                                           .selectedItem2.value,
                                                       onChanged:
@@ -243,23 +254,24 @@ class AddStory extends GetView<AddController> {
                                                     ),
                                                   ),
                                                 ),
-                                                title: Text(
+                                                title: const Text(
                                                   "Informasi ini membantu kami lebih memahami ceritamu!",
                                                   style: TextStyle(
                                                       fontSize: 18,
                                                       fontWeight:
-                                                          FontWeight.w300, color: Colors.grey),
+                                                          FontWeight.w300,
+                                                      color: Colors.grey),
                                                 ),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 10,
                                               ),
-                                              Divider(),
+                                              const Divider(),
                                             ],
                                           ),
                                         ),
                                         Padding(
-                                          padding: EdgeInsets.all(10),
+                                          padding: const EdgeInsets.all(10),
                                           child: Row(
                                             children: [
                                               Checkbox(
@@ -267,7 +279,7 @@ class AddStory extends GetView<AddController> {
                                                   onChanged: (bool? newValue) {
                                                     isChecked = newValue!;
                                                   }),
-                                              Column(
+                                              const Column(
                                                 children: [
                                                   Text(
                                                     "Ini adalah murni hasil karya saya sendiri.",
@@ -301,23 +313,23 @@ class AddStory extends GetView<AddController> {
                                                   ),
                                                 ],
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 10,
                                               ),
-                                              Divider(),
+                                              const Divider(),
                                             ],
                                           ),
                                         ),
                                         ButtonTheme(
                                           child: Container(
                                             alignment: Alignment.bottomRight,
-                                            margin: EdgeInsets.all(20),
+                                            margin: const EdgeInsets.all(20),
                                             child: ButtonTheme(
                                               child: Container(
                                                 width: 100,
                                                 height: 50,
                                                 child: FloatingActionButton(
-                                                  backgroundColor:
+                                                  backgroundColor: const
                                                       Color(0xFFA9C6D1),
                                                   onPressed: () async {
                                                     print("loding");

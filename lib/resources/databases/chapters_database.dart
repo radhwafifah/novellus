@@ -9,7 +9,8 @@ class ChaptersDatabase {
 
   Future<List<Map<String, dynamic>>> select() async {
     try {
-      await _supabase.from(table).select();
+      final data = await _supabase.from(table).select();
+      return List<Map<String, dynamic>>.from(data);
     } catch (e) {
       debugPrint(e.toString());
     }

@@ -36,7 +36,7 @@ class Login extends GetView<AuthController> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     const Text(
-                      "Username",
+                      "Email",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -67,7 +67,7 @@ class Login extends GetView<AuthController> {
                           controller: controller.email,
                           decoration: const InputDecoration(
                               border: InputBorder.none,
-                              hintText: "Masukkan username",
+                              hintText: "Masukkan email",
                               hintStyle: TextStyle(
                                   fontSize: 15, color: Color(0xFFB4B4B4)),
                               contentPadding: EdgeInsets.symmetric(

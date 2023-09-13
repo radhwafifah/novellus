@@ -22,20 +22,11 @@ class _HistoryState extends State<History> {
                 children: [
                   Row(
                     children: [
-                      Container(
-                          alignment: Alignment.bottomLeft,
-                          child: IconButton(
-                            icon: Icon(Icons.arrow_back, size: 33,),
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Bar()));
-                            },
-                          )),
                       SizedBox(
                         width: 10,
                       ),
                       Text(
-                        "Riwayat",
+                        "Riwayat Baca",
                         style: TextStyle(
                             fontSize: 26, fontWeight: FontWeight.bold),
                       ),
@@ -71,7 +62,10 @@ class _HistoryState extends State<History> {
                           height: 160,
                           decoration: BoxDecoration(
                               color: Colors.grey,
-                              borderRadius: BorderRadius.circular(10)),
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                      image: AssetImage("assets/remaja2.jpg")),
+                              ),
                         ),
                       ),
                     ],

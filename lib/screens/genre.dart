@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Genre extends StatefulWidget {
   @override
@@ -13,9 +14,6 @@ class _GenreState extends State<Genre> {
         padding: EdgeInsets.all(10),
         child: ListView(
           children: [
-            SizedBox(
-              height: 10,
-            ),
             Padding(
               padding: const EdgeInsets.all(10),
               child: Row(
@@ -25,9 +23,14 @@ class _GenreState extends State<Genre> {
                     children: [
                       Container(
                           alignment: Alignment.bottomLeft,
-                          child: Icon(
-                            Icons.arrow_back,
-                            size: 36,
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.arrow_back,
+                              size: 33,
+                            ),
+                            onPressed: () {
+                              Get.offNamed('/bar');
+                            },
                           )),
                       SizedBox(
                         width: 10,
@@ -79,41 +82,55 @@ class _GenreState extends State<Genre> {
               padding: EdgeInsets.all(15),
               child: Row(
                 children: [
-                  Card(
-                    child: Container(
-                      width: 200,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          color: Color(0xFFD9D9D9),
-                          borderRadius: BorderRadius.circular(30)),
-                      child: Column(
-                        children: [
-                          Text(
-                            "Romance",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
-                          )
-                        ],
+                  ButtonTheme(
+                      child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    width: 160,
+                    height: 50,
+                    child: FloatingActionButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Romansa",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                      backgroundColor: Color(0xFFA9C6D1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
+                  )),
+                  SizedBox(
+                    width: 20,
                   ),
-                  SizedBox(width: 20,),
-                  Card(
-                    child: Container(
-                      width: 200,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          color: Color(0xFFD9D9D9),
-                          borderRadius: BorderRadius.circular(30)),
-                      child: Column(
-                        children: [
-                          Text(
-                            "Horror",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
-                          )
-                        ],
+                  ButtonTheme(
+                      child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    width: 160,
+                    height: 50,
+                    child: FloatingActionButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Horor",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                      backgroundColor: Color(0xFFA9C6D1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
-                  ),
+                  )),
                 ],
               ),
             ),
@@ -121,41 +138,59 @@ class _GenreState extends State<Genre> {
               padding: EdgeInsets.all(15),
               child: Row(
                 children: [
-                  Card(
-                    child: Container(
-                      width: 200,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          color: Color(0xFFD9D9D9),
-                          borderRadius: BorderRadius.circular(30)),
-                      child: Column(
-                        children: [
-                          Text(
-                            "Humor",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
-                          )
-                        ],
-                      ),
-                    ),
+                  ButtonTheme(
+                              child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.white,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            width: 160,
+                            height: 50,
+                            child: FloatingActionButton(
+                              onPressed: () {
+                              },
+                              child: Text(
+                                "Hayalan",
+                                style: TextStyle(
+                                    fontSize: 18, color: Colors.white),
+                              ),
+                              backgroundColor: Color(0xFFA9C6D1),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                          )),
+                  SizedBox(
+                    width: 20,
                   ),
-                  SizedBox(width: 20,),
-                  Card(
-                    child: Container(
-                      width: 200,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          color: Color(0xFFD9D9D9),
-                          borderRadius: BorderRadius.circular(30)),
-                      child: Column(
-                        children: [
-                          Text(
-                            "Adventure",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  ButtonTheme(
+                              child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.white,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            width: 160,
+                            height: 50,
+                            child: FloatingActionButton(
+                              onPressed: () {
+                              },
+                              child: Text(
+                                "Humor",
+                                style: TextStyle(
+                                    fontSize: 18, color: Colors.white),
+                              ),
+                              backgroundColor: Color(0xFFA9C6D1),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                          )),
                 ],
               ),
             ),
