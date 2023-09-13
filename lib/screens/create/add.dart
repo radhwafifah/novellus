@@ -75,6 +75,7 @@ class AddStory extends GetView<AddController> {
                           ),
                           onPressed: () async {
                             await controller.selectImage();
+                            await controller.uploadImage();
                           },
                         ),
                       );
@@ -225,7 +226,6 @@ class AddStory extends GetView<AddController> {
                                                   () => Container(
                                                     width: 120,
                                                     height: 60,
-                                                    color: const Color(0xFFA9C6D1),
                                                     child:
                                                         DropdownButton<String>(
                                                       value: controller
@@ -327,6 +327,7 @@ class AddStory extends GetView<AddController> {
                                                   onPressed: () async {
                                                     print("loding");
                                                     await controller.add();
+                                                    controller.create.getLiteraryWork();
                                                   },
                                                   child: Text(
                                                     "Lanjut",

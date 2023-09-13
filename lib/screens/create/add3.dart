@@ -26,59 +26,15 @@ class AddStory3 extends GetView<Add3Controller> {
                       Get.toNamed('/chapters');
                     },
                   ),
+                  SizedBox(width: 10,),
                   Text(
-                    "Buat Cerita",
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                    "Buat Bab Baru",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
               const SizedBox(
-                height: 40,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  children: [
-                    Column(
-                      children: [
-                        GetBuilder<Add3Controller>(
-                          builder: (_) {
-                            return Container(
-                              width: 450,
-                              height: 175,
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.6),
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(
-                                  color: Colors.blue.shade300,
-                                  width: 1.0,
-                                ),
-                                image: controller.image == null
-                                  ? null
-                                  : DecorationImage(
-                                      image: FileImage(controller.image!),
-                                    ),
-                              ),
-                              child: IconButton(
-                                icon: Icon(
-                                  Icons.add_a_photo_outlined,
-                                  color: Colors.blue.shade300,
-                                  size: 40,
-                                ),
-                                onPressed: () async {
-                                await controller.selectImage();
-                              },
-                              ),
-                            );
-                          }
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 15,
+                height: 20,
               ),
               Padding(
                 padding: EdgeInsets.all(10),

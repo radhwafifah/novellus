@@ -6,10 +6,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:novellus1/common/controllers/app_controller.dart';
 import 'package:novellus1/resources/databases/literary_database.dart';
 import 'package:novellus1/resources/models/literary_model.dart';
+import 'package:novellus1/screens/create/controllers/create_controller.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AddController extends GetxController {
   AppController app = Get.find<AppController>();
+  CreateController create = Get.find<CreateController>();
+
   var selectedItem = 'Kategori'.obs;
   List<String> items = ['Kategori', 'Novel', 'Cerpen', 'Dongeng', 'Komik'];
   var selectedItem2 = 'Genre'.obs;
@@ -28,6 +31,8 @@ class AddController extends GetxController {
   Future<void> add() async {
     try {
       print(app.user().id);
+      String urlImage = await uploadImage();
+      print(urlImage);
       await LiteraryDatabase().insert(
           model: LiteraryModel(
               userId: app.user().id!,
@@ -35,11 +40,14 @@ class AddController extends GetxController {
               title: title.text,
               synopsis: synopsis.text,
               genre: selectedItem2.value,
-              coverUrl: '',
+              coverUrl: urlImage,
               status: 'draft',
               publishedDate: null,
               createdAt: DateTime.now().toIso8601String()));
               Get.toNamed('/add3');
+              title.clear();
+              synopsis.clear();
+              image = null;
     } catch (e) {
       print(e);
     }
@@ -50,7 +58,7 @@ class AddController extends GetxController {
   Future<void> selectImage() async {
     final ImagePicker picker = ImagePicker();
 
-    XFile? result = await picker.pickImage(source: ImageSource.camera);
+    XFile? result = await picker.pickImage(source: ImageSource.gallery);
 
     if (result != null) {
       image = File(result.path);
@@ -73,13 +81,7 @@ class AddController extends GetxController {
                 ),
               );
 
-      image = null;
       refresh();
-
-      // TODO: Baca => Path ini adalah URL yang nanti disimpan di database
-      // contoh hasil path nya itu seperti ini "covers/cover_1192023162353538.png"
-      // Untuk menampilkan gambar dari URL pake widget Image.network() atau NetworkImage()
-      // Ingat tambahkan Base Url supabase nya contoh https://xhvtqlnylrdnwsgmawel.supabase.co/storage/v1/object/public/covers/cover_1192023162353538.png
       print(path);
       return path;
     } catch (e) {

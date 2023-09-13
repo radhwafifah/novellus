@@ -9,37 +9,18 @@ class _LibraryState extends State<Library> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Perpustakaan', style: TextStyle(fontSize: 26),),
+        centerTitle: true,
+        actions: <Widget>[
+          IconButton(onPressed: () {}, icon: Icon(Icons.search), iconSize: 33,)
+        ],
+        backgroundColor: Color(0xFFA9C6D1),
+      ),
       body: Padding(
         padding: EdgeInsets.all(10),
         child: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "Perpustakaan",
-                        style: TextStyle(
-                            fontSize: 26, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                  Container(
-                      alignment: Alignment.bottomRight,
-                      child: Icon(
-                        Icons.search_sharp,
-                        size: 33,
-                      )),
-                ],
-              ),
-            ),
-            SizedBox(height: 40,),
             Padding(
               padding: const EdgeInsets.all(10),
               child: Row(

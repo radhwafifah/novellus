@@ -8,37 +8,18 @@ class Create extends GetView<CreateController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Buat Karya', style: TextStyle(fontSize: 26),),
+        centerTitle: true,
+        actions: <Widget>[
+          IconButton(onPressed: () {}, icon: Icon(Icons.search), iconSize: 33,)
+        ],
+        backgroundColor: Color(0xFFA9C6D1),
+      ),
       body: Padding(
         padding: EdgeInsets.all(10),
         child: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      SizedBox(width: 10),
-                      Text(
-                        "Buat Cerita",
-                        style: TextStyle(
-                            fontSize: 26, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                  Container(
-                      alignment: Alignment.bottomRight,
-                      child: Icon(
-                        Icons.search_sharp,
-                        size: 33,
-                      )),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 50,
-            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ButtonTheme(
@@ -92,6 +73,10 @@ class Create extends GetView<CreateController> {
                             decoration: BoxDecoration(
                                 color: Colors.grey,
                                 borderRadius: BorderRadius.circular(10)),
+                                child: Image.network(
+                                  "https://xhvtqlnylrdnwsgmawel.supabase.co/storage/v1/object/public/${controller.literaryWork[index]['coverUrl']}",
+                                  fit: BoxFit.cover,
+                                ),
                           ),
                         ),
                       ],
@@ -104,7 +89,7 @@ class Create extends GetView<CreateController> {
                         Text(
                           controller.literaryWork[index]['title'],
                           style: TextStyle(
-                              fontSize: 23, fontWeight: FontWeight.w400),
+                              fontSize: 20, fontWeight: FontWeight.w400),
                         ),
                         SizedBox(
                           height: 5,
@@ -112,7 +97,7 @@ class Create extends GetView<CreateController> {
                         Text(
                           "Bab 1",
                           style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w300),
+                              fontSize: 19, fontWeight: FontWeight.w300),
                         ),
                         SizedBox(
                           height: 30,

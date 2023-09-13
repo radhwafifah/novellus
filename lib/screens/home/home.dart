@@ -249,7 +249,7 @@ class Home extends GetView<HomeController> {
                         children: [
                           InkWell(
                             onTap: () {
-                              
+                              Get.toNamed('/book');
                             },
                             child: Card(
                               child: Container(

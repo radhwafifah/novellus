@@ -16,7 +16,7 @@ class CreateController extends GetxController {
   List<Map<String, dynamic>> literaryWork = [];
 
   void getLiteraryWork() async {
-    List<Map<String, dynamic>> result = await LiteraryDatabase().select();
+    List<Map<String, dynamic>> result = await LiteraryDatabase().select(id: app.user().id!);
     if (result.isNotEmpty) {
       literaryWork.addAll(result);
 

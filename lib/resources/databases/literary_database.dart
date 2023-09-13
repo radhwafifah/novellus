@@ -7,9 +7,9 @@ class LiteraryDatabase {
 
   final String table = "literaryWorks";
 
-  Future<List<Map<String, dynamic>>> select() async {
+  Future<List<Map<String, dynamic>>> select({required int id}) async {
     try {
-      final data = await _supabase.from(table).select();
+      final data = await _supabase.from(table).select().eq("userId", id);
       return List<Map<String, dynamic>>.from(data);
     } catch (e) {
       debugPrint(e.toString());
