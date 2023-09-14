@@ -42,24 +42,24 @@ class AuthController extends GetxController {
       AuthResponse response =
           await _auth.signUp(email: email.text, password: password.text);
 
-          if (response.user != null) {
-            UserModel userModel = UserModel(
+      if (response.user != null) {
+        UserModel userModel = UserModel(
           email: email.text,
           username: username.text,
           name: name.text,
           password: password.text,
           role: "user",
           createdAt: DateTime.now().toIso8601String(),
-          );
+        );
 
-          await UserDatabase().insert(userModel: userModel);
+        var result = await UserDatabase().insert(userModel: userModel);
+        UserModel userModelNew = UserModel.fromMap(result[0]);
+        await _box.write("user", userModelNew.toMap());
 
-          await _box.write("user", userModel.toMap());
-
-          app.isAuthenticated.value = true;
-          } else {
-            print("Daftar Gagal");
-          }
+        app.isAuthenticated.value = true;
+      } else {
+        print("Daftar Gagal");
+      }
     } catch (e) {
       print(e);
     }
@@ -67,27 +67,27 @@ class AuthController extends GetxController {
 
   Future<void> login() async {
     try {
-      AuthResponse response =
-          await _auth.signInWithPassword(email: email.text, password: password.text);
+      AuthResponse response = await _auth.signInWithPassword(
+          email: email.text, password: password.text);
 
-          if (response.user != null) {
-            UserModel? userModel = await UserDatabase().select(email: email.text);
-            if (userModel != null) {
-              print(userModel.toMap());
-            await _box.write("user", userModel.toMap());
+      if (response.user != null) {
+        UserModel? userModel = await UserDatabase().select(email: email.text);
+        if (userModel != null) {
+          print(userModel.toMap());
+          await _box.write("user", userModel.toMap());
 
-            app.isAuthenticated.value = true;
-            } else {
-              print("User tidak ditemukan");
-            }
-
-          } else {
-            print("User tidak ditemukan");
-          }
+          app.isAuthenticated.value = true;
+        } else {
+          print("User tidak ditemukan");
+        }
+      } else {
+        print("User tidak ditemukan");
+      }
     } catch (e) {
       print("Login Gagal");
     }
   }
+
   Future<void> logout() async {
     try {
       if (_box.read("user") != null) {

@@ -6,7 +6,6 @@ class AddStory extends GetView<AddController> {
   bool isChecked = false;
   final AddController controller = Get.put(AddController());
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,8 +43,8 @@ class AddStory extends GetView<AddController> {
                   children: [
                     const Text(
                       "Tambahkan Sampul Buku Cerita :",
-                      style: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.w400),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
                     ),
                     const SizedBox(
                       height: 12,
@@ -155,196 +154,206 @@ class AddStory extends GetView<AddController> {
                                       topRight: Radius.circular(40))),
                               context: context,
                               builder: (BuildContext context) {
-                                return SizedBox(
-                                  height: 500,
-                                  child: Center(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: <Widget>[
-                                        const Text(
-                                          "Tambahkan",
-                                          style: TextStyle(
-                                              fontSize: 25,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        const Divider(),
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Column(
-                                            children: [
-                                              ListTile(
-                                                leading: Obx(
-                                                  () => Container(
-                                                    width: 120,
-                                                    height: 60,
-                                                    child:
-                                                        DropdownButton<String>(
-                                                      value: controller
-                                                          .selectedItem.value,
-                                                      onChanged:
-                                                          (String? newValue) {
-                                                        controller.selectedItem
-                                                            .value = newValue!;
-                                                      },
-                                                      isExpanded: true,
-                                                      items: controller.items
-                                                          .map((String value) {
-                                                        return DropdownMenuItem<
-                                                            String>(
-                                                          value: value,
-                                                          child: Text(value),
-                                                        );
-                                                      }).toList(),
+                                return SingleChildScrollView(
+                                  child: SizedBox(
+                                    height: 500,
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          const Text(
+                                            "Tambahkan",
+                                            style: TextStyle(
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          const Divider(),
+                                          Padding(
+                                            padding: const EdgeInsets.all(10),
+                                            child: Column(
+                                              children: [
+                                                ListTile(
+                                                  leading: Obx(
+                                                    () => Container(
+                                                      width: 120,
+                                                      height: 60,
+                                                      child: DropdownButton<
+                                                          String>(
+                                                        value: controller
+                                                            .selectedItem.value,
+                                                        onChanged:
+                                                            (String? newValue) {
+                                                          controller
+                                                                  .selectedItem
+                                                                  .value =
+                                                              newValue!;
+                                                        },
+                                                        isExpanded: true,
+                                                        items: controller.items
+                                                            .map(
+                                                                (String value) {
+                                                          return DropdownMenuItem<
+                                                              String>(
+                                                            value: value,
+                                                            child: Text(value),
+                                                          );
+                                                        }).toList(),
+                                                      ),
                                                     ),
                                                   ),
+                                                  title: const Text(
+                                                    "Informasi ini membantu kami lebih memahami ceritamu!",
+                                                    style: TextStyle(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.w300,
+                                                        color: Colors.grey),
+                                                  ),
                                                 ),
-                                                title: const Text(
-                                                  "Informasi ini membantu kami lebih memahami ceritamu!",
-                                                  style: TextStyle(
-                                                      fontSize: 18,
-                                                      fontWeight:
-                                                          FontWeight.w300,
-                                                      color: Colors.grey),
+                                                const SizedBox(
+                                                  height: 10,
                                                 ),
-                                              ),
-                                              const SizedBox(
-                                                height: 10,
-                                              ),
-                                              const Divider(),
-                                            ],
+                                                const Divider(),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Column(
-                                            children: [
-                                              ListTile(
-                                                leading: Obx(
-                                                  () => Container(
-                                                    width: 120,
-                                                    height: 60,
-                                                    child:
-                                                        DropdownButton<String>(
-                                                      value: controller
-                                                          .selectedItem2.value,
-                                                      onChanged:
-                                                          (String? newValue) {
-                                                        controller.selectedItem2
-                                                            .value = newValue!;
-                                                      },
-                                                      isExpanded: true,
-                                                      items: controller.items2
-                                                          .map((String value) {
-                                                        return DropdownMenuItem<
-                                                            String>(
-                                                          value: value,
-                                                          child: Text(value),
-                                                        );
-                                                      }).toList(),
+                                          Padding(
+                                            padding: const EdgeInsets.all(10),
+                                            child: Column(
+                                              children: [
+                                                ListTile(
+                                                  leading: Obx(
+                                                    () => Container(
+                                                      width: 120,
+                                                      height: 60,
+                                                      child: DropdownButton<
+                                                          String>(
+                                                        value: controller
+                                                            .selectedItem2
+                                                            .value,
+                                                        onChanged:
+                                                            (String? newValue) {
+                                                          controller
+                                                                  .selectedItem2
+                                                                  .value =
+                                                              newValue!;
+                                                        },
+                                                        isExpanded: true,
+                                                        items: controller.items2
+                                                            .map(
+                                                                (String value) {
+                                                          return DropdownMenuItem<
+                                                              String>(
+                                                            value: value,
+                                                            child: Text(value),
+                                                          );
+                                                        }).toList(),
+                                                      ),
                                                     ),
                                                   ),
+                                                  title: const Text(
+                                                    "Informasi ini membantu kami lebih memahami ceritamu!",
+                                                    style: TextStyle(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.w300,
+                                                        color: Colors.grey),
+                                                  ),
                                                 ),
-                                                title: const Text(
-                                                  "Informasi ini membantu kami lebih memahami ceritamu!",
-                                                  style: TextStyle(
-                                                      fontSize: 18,
-                                                      fontWeight:
-                                                          FontWeight.w300,
-                                                      color: Colors.grey),
+                                                const SizedBox(
+                                                  height: 10,
                                                 ),
-                                              ),
-                                              const SizedBox(
-                                                height: 10,
-                                              ),
-                                              const Divider(),
-                                            ],
+                                                const Divider(),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Row(
-                                            children: [
-                                              Checkbox(
-                                                  value: isChecked,
-                                                  onChanged: (bool? newValue) {
-                                                    isChecked = newValue!;
-                                                  }),
-                                              const Column(
-                                                children: [
-                                                  Text(
-                                                    "Ini adalah murni hasil karya saya sendiri.",
-                                                    style: TextStyle(
-                                                        fontSize: 18,
-                                                        fontWeight:
-                                                            FontWeight.w300,
-                                                        color: Colors.grey),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
-                                                  Text(
-                                                    "Pelanggaran hak cipta dapat menyebabkan",
-                                                    style: TextStyle(
-                                                        fontSize: 18,
-                                                        fontWeight:
-                                                            FontWeight.w300,
-                                                        color: Colors.grey),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
-                                                  Text(
-                                                    "penghapusan cerita atau penutupan akun.",
-                                                    style: TextStyle(
-                                                        fontSize: 18,
-                                                        fontWeight:
-                                                            FontWeight.w300,
-                                                        color: Colors.grey),
-                                                  ),
-                                                ],
-                                              ),
-                                              const SizedBox(
-                                                height: 10,
-                                              ),
-                                              const Divider(),
-                                            ],
+                                          Padding(
+                                            padding: const EdgeInsets.all(10),
+                                            child: Row(
+                                              children: [
+                                                Checkbox(
+                                                    value: isChecked,
+                                                    onChanged:
+                                                        (bool? newValue) {
+                                                      isChecked = newValue!;
+                                                    }),
+                                                const Column(
+                                                  children: [
+                                                    Text(
+                                                      "Ini adalah murni hasil karya saya sendiri.",
+                                                      style: TextStyle(
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          color: Colors.grey),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Text(
+                                                      "Pelanggaran hak cipta dapat menyebabkan",
+                                                      style: TextStyle(
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          color: Colors.grey),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Text(
+                                                      "penghapusan cerita atau penutupan akun.",
+                                                      style: TextStyle(
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          color: Colors.grey),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                                const Divider(),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                        ButtonTheme(
-                                          child: Container(
-                                            alignment: Alignment.bottomRight,
-                                            margin: const EdgeInsets.all(20),
-                                            child: ButtonTheme(
-                                              child: Container(
-                                                width: 100,
-                                                height: 50,
-                                                child: FloatingActionButton(
-                                                  backgroundColor: const
-                                                      Color(0xFFA9C6D1),
-                                                  onPressed: () async {
-                                                    print("loding");
-                                                    await controller.add();
-                                                    controller.create.getLiteraryWork();
-                                                  },
-                                                  child: Text(
-                                                    "Lanjut",
-                                                    style:
-                                                        TextStyle(fontSize: 17),
-                                                  ),
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
+                                          ButtonTheme(
+                                            child: Container(
+                                              alignment: Alignment.bottomRight,
+                                              margin: const EdgeInsets.all(20),
+                                              child: ButtonTheme(
+                                                child: Container(
+                                                  width: 100,
+                                                  height: 50,
+                                                  child: FloatingActionButton(
+                                                    backgroundColor:
+                                                        const Color(0xFFA9C6D1),
+                                                    onPressed: () async {
+                                                      print("loding");
+                                                      await controller.add();
+                                                    },
+                                                    child: Text(
+                                                      "Lanjut",
+                                                      style: TextStyle(
+                                                          fontSize: 17),
+                                                    ),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 );

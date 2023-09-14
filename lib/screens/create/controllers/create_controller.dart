@@ -4,7 +4,6 @@ import 'package:novellus1/resources/databases/literary_database.dart';
 
 class CreateController extends GetxController {
   AppController app = Get.find<AppController>();
-  
 
   @override
   void onInit() {
@@ -16,7 +15,8 @@ class CreateController extends GetxController {
   List<Map<String, dynamic>> literaryWork = [];
 
   void getLiteraryWork() async {
-    List<Map<String, dynamic>> result = await LiteraryDatabase().select(id: app.user().id!);
+    List<Map<String, dynamic>> result =
+        await LiteraryDatabase().select(id: app.user().id!);
     if (result.isNotEmpty) {
       literaryWork.addAll(result);
 

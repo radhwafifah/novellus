@@ -6,7 +6,7 @@ class UserDatabase {
 
   final String table = "users";
 
-  Future<List<Map<String,dynamic>>> selectAll() async {
+  Future<List<Map<String, dynamic>>> selectAll() async {
     try {
       return await _supabase.from(table).select();
     } catch (e) {
@@ -28,10 +28,12 @@ class UserDatabase {
     }
   }
 
-  Future<bool> insert({required UserModel userModel}) async {
+  Future insert({required UserModel userModel}) async {
     try {
-      await _supabase.from(table).insert(userModel.toMapInsert());
-      return true;
+      return await _supabase
+          .from(table)
+          .insert(userModel.toMapInsert())
+          .select();
     } catch (e) {
       print(e);
       return false;

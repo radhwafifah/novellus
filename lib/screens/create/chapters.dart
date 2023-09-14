@@ -26,14 +26,14 @@ class Chapters extends GetView<ChaptersController> {
                               size: 33,
                             ),
                             onPressed: () {
-                              Get.toNamed('/bar');
+                              Get.back();
                             },
                           )),
                       SizedBox(
                         width: 10,
                       ),
                       Text(
-                        "Masa Remaja",
+                        controller.literalyWork['title'],
                         style: TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold),
                       ),
@@ -51,58 +51,55 @@ class Chapters extends GetView<ChaptersController> {
             SizedBox(
               height: 40,
             ),
-                Column(
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      height: 110,
-                      decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: const Column(
-                        children: [
-                          Text(
-                            "Bab 1",
-                            style: TextStyle(
-                                fontSize: 23, fontWeight: FontWeight.w400),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "Pendahuluan",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w300),
-                          ),
-                        ],
+            GetBuilder<ChaptersController>(builder: (_) {
+              return Column(
+                children: [
+                  ...List.generate(
+                    controller.chapters.length,
+                    (i) => InkWell(
+                      onTap: () {},
+                      child: Container(
+                        width: double.infinity,
+                        height: 110,
+                        margin: EdgeInsets.only(bottom: 10),
+                        decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Bab ${i + 1}",
+                              style: TextStyle(
+                                  fontSize: 23, fontWeight: FontWeight.w400),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              controller.chapters[i]['title'],
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.w300),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ],
-                ),
-            Container(
-              alignment: Alignment.bottomRight,
-              margin: EdgeInsets.all(20),
-              child: ButtonTheme(
-                child: Container(
-                  child: FloatingActionButton(
-                    backgroundColor: Color(0xFFA9C6D1),
-                    onPressed: () {
-                      Get.toNamed('/add3');
-                    },
-                    child: IconButton(
-                      icon: Icon(Icons.add),
-                      onPressed: () {
-                        Get.toNamed('/add3');
-                      },
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
                   ),
-                ),
-              ),
-            ),
+                ],
+              );
+            }),
           ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xFFA9C6D1),
+        onPressed: () {
+          Get.toNamed('/add3', arguments: controller.literalyWork);
+        },
+        child: Icon(Icons.add),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
         ),
       ),
     );

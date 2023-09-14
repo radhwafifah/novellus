@@ -14,20 +14,19 @@ class LiteraryDatabase {
     } catch (e) {
       debugPrint(e.toString());
     }
-    return[];
+    return [];
   }
 
-  Future insert({required LiteraryModel model}) async{
+  Future insert({required LiteraryModel model}) async {
     try {
-      await _supabase.from(table).insert(model.toMap());
-      return true;
+      return await _supabase.from(table).insert(model.toMap()).select();
     } catch (e) {
       print(e);
       return false;
     }
   }
 
-  Future update({required int id, required LiteraryModel model}) async{
+  Future update({required int id, required LiteraryModel model}) async {
     try {
       await _supabase.from(table).update(model.toMap()).eq("id", id);
     } catch (e) {
@@ -35,7 +34,7 @@ class LiteraryDatabase {
     }
   }
 
-  Future delete({required int id}) async{
+  Future delete({required int id}) async {
     try {
       await _supabase.from(table).delete().eq("id", id);
     } catch (e) {

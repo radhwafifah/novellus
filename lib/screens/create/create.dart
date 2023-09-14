@@ -9,10 +9,17 @@ class Create extends GetView<CreateController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Buat Karya', style: TextStyle(fontSize: 26),),
+        title: const Text(
+          'Buat Karya',
+          style: TextStyle(fontSize: 26),
+        ),
         centerTitle: true,
         actions: <Widget>[
-          IconButton(onPressed: () {}, icon: Icon(Icons.search), iconSize: 33,)
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.search),
+            iconSize: 33,
+          )
         ],
         backgroundColor: Color(0xFFA9C6D1),
       ),
@@ -73,10 +80,10 @@ class Create extends GetView<CreateController> {
                             decoration: BoxDecoration(
                                 color: Colors.grey,
                                 borderRadius: BorderRadius.circular(10)),
-                                child: Image.network(
-                                  "https://xhvtqlnylrdnwsgmawel.supabase.co/storage/v1/object/public/${controller.literaryWork[index]['coverUrl']}",
-                                  fit: BoxFit.cover,
-                                ),
+                            child: Image.network(
+                              "https://xhvtqlnylrdnwsgmawel.supabase.co/storage/v1/object/public/${controller.literaryWork[index]['coverUrl']}",
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ],
@@ -108,7 +115,8 @@ class Create extends GetView<CreateController> {
                           height: 40,
                           child: FloatingActionButton(
                             onPressed: () {
-                              Get.toNamed('/chapters');
+                              Get.toNamed('/chapters',
+                                  arguments: controller.literaryWork[index]);
                             },
                             child: Text(
                               "Lanjutkan",

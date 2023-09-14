@@ -7,17 +7,21 @@ class ChaptersDatabase {
 
   final String table = "chapters";
 
-  Future<List<Map<String, dynamic>>> select() async {
+  Future<List<Map<String, dynamic>>> select(
+      {required int literalyWorkId}) async {
     try {
-      final data = await _supabase.from(table).select();
+      final data = await _supabase
+          .from(table)
+          .select()
+          .eq("literaryWorkId", literalyWorkId);
       return List<Map<String, dynamic>>.from(data);
     } catch (e) {
       debugPrint(e.toString());
     }
-    return[];
+    return [];
   }
 
-  Future insert({required ChaptersModel model}) async{
+  Future insert({required ChaptersModel model}) async {
     try {
       await _supabase.from(table).insert(model.toMap());
       return true;
@@ -27,7 +31,7 @@ class ChaptersDatabase {
     }
   }
 
-  Future update({required int id, required ChaptersModel model}) async{
+  Future update({required int id, required ChaptersModel model}) async {
     try {
       await _supabase.from(table).update(model.toMap()).eq("id", id);
     } catch (e) {
@@ -35,7 +39,7 @@ class ChaptersDatabase {
     }
   }
 
-  Future delete({required int id}) async{
+  Future delete({required int id}) async {
     try {
       await _supabase.from(table).delete().eq("id", id);
     } catch (e) {

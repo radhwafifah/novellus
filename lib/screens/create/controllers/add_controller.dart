@@ -33,10 +33,16 @@ class AddController extends GetxController {
       print(app.user().id);
       String urlImage = await uploadImage();
       print(urlImage);
-      await LiteraryDatabase().insert(
+      var result = await LiteraryDatabase().insert(
           model: LiteraryModel(
               userId: app.user().id!,
-              categoryId: selectedItem.value == 'Novel'? 1 : selectedItem.value == 'Cerpen'? 2 : selectedItem.value == 'Dongeng'? 3 : 4,
+              categoryId: selectedItem.value == 'Novel'
+                  ? 1
+                  : selectedItem.value == 'Cerpen'
+                      ? 2
+                      : selectedItem.value == 'Dongeng'
+                          ? 3
+                          : 4,
               title: title.text,
               synopsis: synopsis.text,
               genre: selectedItem2.value,
@@ -44,10 +50,11 @@ class AddController extends GetxController {
               status: 'draft',
               publishedDate: null,
               createdAt: DateTime.now().toIso8601String()));
-              Get.toNamed('/add3');
-              title.clear();
-              synopsis.clear();
-              image = null;
+
+      Get.toNamed('/add3', arguments: result[0]);
+      title.clear();
+      synopsis.clear();
+      image = null;
     } catch (e) {
       print(e);
     }
